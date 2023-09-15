@@ -57,6 +57,7 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name="user_comment"
     )
+    body = models.TextField(_("body"),max_length=200,default=" ")
     date_added = models.DateTimeField(_("comment date"), auto_now_add=True)
     like = models.ManyToManyField(
         User, 
