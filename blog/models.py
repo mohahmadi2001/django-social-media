@@ -19,13 +19,13 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name="post"
     )
-    like = models.ManyToManyField(
+    likes = models.ManyToManyField(
         User,
         verbose_name=_("like"),
         blank=True,
         related_name="post_like"
     )
-    save = models.ManyToManyField(
+    saves = models.ManyToManyField(
         User,
         verbose_name=_("save"),
         blank=True,
@@ -39,6 +39,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def total_likes(self):
+        return self.likes.all().count()
+    
+    def total_save(self):
+        return self.saves.all().count()
     
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={"pk":self.pk})
@@ -59,7 +65,7 @@ class Comment(models.Model):
     )
     body = models.TextField(_("body"),max_length=200,default=" ")
     date_added = models.DateTimeField(_("comment date"), auto_now_add=True)
-    like = models.ManyToManyField(
+    likes = models.ManyToManyField(
         User, 
         verbose_name=_("like"),
         blank=True,
@@ -80,6 +86,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def total_comments_like(self):
+        return self.likes.count() 
+    
+    def total_reply_counts(self):
+        return self.reply.count()
 
     def get_absolute_url(self):
         return reverse("Comment_detail", kwargs={"pk": self.pk})
