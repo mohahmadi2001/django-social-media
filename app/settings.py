@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'chats',
     'friends',
     'notification',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
