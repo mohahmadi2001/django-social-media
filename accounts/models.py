@@ -36,6 +36,15 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} Profile"
+    
+    def profile_posts(self):
+        return self.user.post.all()
+    
+    def get_friends(self):
+        return self.friends.all()
+    
+    def get_friends_num(self):
+        return self.friends.all().count()
 
     def get_absolute_url(self):
         return reverse("Profile_detail", kwargs={"pk": self.pk})
