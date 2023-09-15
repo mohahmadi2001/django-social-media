@@ -87,6 +87,12 @@ class Comment(models.Model):
     def __str__(self):
         return self.name
     
+    def get_comments_count(self):
+        return self.id.count()
+    
+    def get_comments(self):
+        return f"{self.user.username}-{self.body}"
+    
     def total_comments_like(self):
         return self.likes.count() 
     

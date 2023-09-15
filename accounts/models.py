@@ -40,10 +40,16 @@ class Profile(models.Model):
     def profile_posts(self):
         return self.user.post.all()
     
+    def get_followings(self):
+        return self.following.all()
+    
+    def get_followings_count(self):
+        return self.following.all().count()
+    
     def get_friends(self):
         return self.friends.all()
     
-    def get_friends_num(self):
+    def get_friends_count(self):
         return self.friends.all().count()
 
     def get_absolute_url(self):
