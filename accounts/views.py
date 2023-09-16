@@ -6,6 +6,7 @@ from django.contrib import messages
 
 class UserRegisterView(View):
     template_name = 'users/register.html'
+    
     def post(self, request, *args, **kwargs):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
